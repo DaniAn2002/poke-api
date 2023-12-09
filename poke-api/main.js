@@ -20,7 +20,7 @@ const getCharacters = async (contenidoInput = '') => {
 
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${contenidoInput}`)
   const data = await response.json()
-  console.log(data.results);
+  console.log(data);
 
   const pokemonsCardContainer = document.querySelector('#pokemon-card')
   pokemonsCardContainer.innerHTML = ''
