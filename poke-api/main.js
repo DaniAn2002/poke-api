@@ -15,21 +15,23 @@ document.querySelector('#app').innerHTML = `
       </div>
   </section> 
 `
-
 const getCharacters = async (contenidoInput = '') => {
+  try {
 
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${contenidoInput}`)
-  const data = await response.json()
-  console.log(data.results);
 
-  const pokemonsCardContainer = document.querySelector('#pokemon-card')
-  pokemonsCardContainer.innerHTML = ''
+    contenidoInput.toLowerCase()
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${contenidoInput}`)
+    const data = await response.json()
+    console.log(data.results);
 
-  data.results.map((char) => {
-    const pokemonCard = document.createElement('div')
-    pokemonCard.classList.add('col-sm-12', 'col-md-4')
+    const pokemonsCardContainer = document.querySelector('#pokemon-card')
+    pokemonsCardContainer.innerHTML = ''
 
-    pokemonCard.innerHTML = `
+    data.results.map((char) => {
+      const pokemonCard = document.createElement('div')
+      pokemonCard.classList.add('col-sm-12', 'col-md-4')
+
+      pokemonCard.innerHTML = `
     <div class="card" style="width: 18rem;">
     <img src="https://res.cloudinary.com/doi7ukubm/image/upload/f_auto,q_auto/frqhrdp5vycaa7fux6gi" class="card-img-top" alt="">
     <div class="card-body">
@@ -40,8 +42,12 @@ const getCharacters = async (contenidoInput = '') => {
     </div>
   </div>
     `
-    pokemonsCardContainer.appendChild(pokemonCard)
- })
+      pokemonsCardContainer.appendChild(pokemonCard)
+    })
+  } catch (error) {
+    console.log(error);
+  }
+
 }
 
 document.getElementById('searchForm').addEventListener('submit', (event) => {
