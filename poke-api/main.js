@@ -16,37 +16,38 @@ document.querySelector('#app').innerHTML = `
   </section> 
 `
 const getCharacters = async (contenidoInput = '') => {
-  try {
 
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${contenidoInput}`)
+  const data = await response.json()
+  console.log(data.name);
 
-    contenidoInput.toLowerCase()
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${contenidoInput}`)
-    const data = await response.json()
-    console.log(data.results);
+  contenidoInput.toLocaleLowerCase()
 
-    const pokemonsCardContainer = document.querySelector('#pokemon-card')
-    pokemonsCardContainer.innerHTML = ''
+  const pokemonsCardContainer = document.querySelector('#pokemon-card')
+  pokemonsCardContainer.innerHTML = ''
 
-    data.results.map((char) => {
-      const pokemonCard = document.createElement('div')
-      pokemonCard.classList.add('col-sm-12', 'col-md-4')
+  data.results.map((char) => {
+    const pokemonCard = document.createElement('div')
+    pokemonCard.classList.add('col-sm-12', 'col-md-4')
 
-      pokemonCard.innerHTML = `
+    const pokes = {
+      img: char.sprites.other.dream_world.front_default,
+      name: char.name
+    }
+
+    pokemonCard.innerHTML = `
     <div class="card" style="width: 18rem;">
-    <img src="https://res.cloudinary.com/doi7ukubm/image/upload/f_auto,q_auto/frqhrdp5vycaa7fux6gi" class="card-img-top" alt="">
+    <img src=${pokes.img} class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">${char.name}</h5>
+      <h5 class="card-title">${pokes.name}</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
         content.</p>
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
     `
-      pokemonsCardContainer.appendChild(pokemonCard)
-    })
-  } catch (error) {
-    console.log(error);
-  }
+    pokemonsCardContainer.appendChild(pokemonCard)
+  })
 
 }
 
@@ -57,5 +58,4 @@ document.getElementById('searchForm').addEventListener('submit', (event) => {
 })
 
 getCharacters()
-
 
