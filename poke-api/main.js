@@ -48,26 +48,6 @@ const getCharacters = async (contenidoInput = '') => {
     console.log(error);
   }
 
-<<<<<<< HEAD
-const getCharacters = async () =>{
-  const response = await fetch('https://pokeapi.co/api/v2/pokemon')
-  const data = await response.json()
-   data.results.map((character,index) =>{
-      if (character.name === 'charmander')
-        console.log(index)
-
-   })
-  
-
-
-  console.log(data.results);
-}
-
-
-
-
-getCharacters()
-=======
 }
 
 document.getElementById('searchForm').addEventListener('submit', (event) => {
@@ -79,4 +59,3 @@ document.getElementById('searchForm').addEventListener('submit', (event) => {
 getCharacters()
 
 
->>>>>>> 95ab3f328627a83d2246ad1e9077078731b145f4
